@@ -16,6 +16,8 @@ exam practice - instead of a generic "work harder".
 
 ## Demo
 
+**Live app:** https://campuspulse-maddy.streamlit.app
+
 ![CampusPulse app](docs/screenshot_app.png)
 
 ## Features
