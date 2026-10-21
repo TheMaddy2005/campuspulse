@@ -1,0 +1,25 @@
+{
+  "dataset": {
+    "rows": 395,
+    "features": 32,
+    "test_size": 0.2,
+    "pass_mark": 10
+  },
+  "grade_regressor": {
+    "mae": 1.159,
+    "rmse": 1.983,
+    "r2": 0.808,
+    "cv_r2_mean": 0.897
+  },
+  "grade_regressor_no_midterms": {
+    "mae": 3.113,
+    "rmse": 3.928,
+    "r2": 0.248,
+    "cv_r2_mean": 0.21
+  },
+  "atrisk_classifier": {
+    "accuracy": 0.886,
+    "f1": 0.911,
+    "cv_f1_mean": 0.93
+  }
+}
