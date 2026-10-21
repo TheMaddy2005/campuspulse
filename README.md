@@ -14,6 +14,10 @@ learning can flag at-risk students **during** the term and suggest specific
 actions - more study time in the right place, attendance fixes, tutoring,
 exam practice - instead of a generic "work harder".
 
+## Demo
+
+![CampusPulse app](docs/screenshot_app.png)
+
 ## Features
 
 - **Grade prediction** - predicts the final grade (0-20 scale) with a mean
