@@ -167,3 +167,78 @@ then turns that prediction into a concrete, personalized learning plan.
 *Educational project - predictions are statistical estimates, not judgments.*
         """
     )
+
+
+# --------------------------------------------------------------------------
+# Footer: terms & privacy
+# --------------------------------------------------------------------------
+st.divider()
+st.caption("CampusPulse - an educational project by Mandakini Manjal")
+
+with st.expander("Terms of Service"):
+    st.markdown(
+        """
+**Last updated: November 2026**
+
+**1. Acceptance** - By using CampusPulse, you agree to these Terms of
+Service. If you do not agree, do not use the app.
+
+**2. What CampusPulse does** - CampusPulse is an educational demo. From a
+student profile you enter, it predicts a final grade (0-20) and an at-risk
+probability, then generates a personalized learning plan.
+
+**3. Educational tool** - Predictions are statistical estimates from models
+trained on the public UCI Student Performance dataset. They are not
+judgments about any person and must not be used for real academic,
+admissions, or administrative decisions.
+
+**4. Acceptable use** - Do not use the app for illegal activities or to make
+decisions about real students.
+
+**5. Availability** - The app is provided as-is, with no guarantee of
+uptime.
+
+**6. Limitation of liability** - The creator is not liable for any damages
+arising from the use of this app.
+
+**7. Contact** - mandakinimanjal@gmail.com
+        """
+    )
+
+with st.expander("Privacy Policy"):
+    st.markdown(
+        """
+**Last updated: November 2026**
+
+**1. Introduction** - This policy covers the CampusPulse app at
+campuspulse-maddy.streamlit.app. By using the app, you agree to this
+policy.
+
+**2. What the app handles** - No account is needed. The student-profile
+details you enter are sent to the app server only to compute the
+prediction for that request. Please do not enter real names or other
+identifying information.
+
+**3. How it is used** - Inputs are processed in memory to produce the
+prediction and learning plan. They are not stored, logged, shared, or used
+for profiling. No data is sold, rented, or monetized.
+
+**4. Training data** - The models are trained on the public, anonymized
+[UCI Student Performance dataset](https://archive.ics.uci.edu/dataset/320/student+performance)
+(CC BY 4.0, Cortez & Silva, 2008).
+
+**5. Third-party services** - Streamlit Cloud (hosting) may process
+standard technical logs.
+
+**6. Data retention** - Inputs are not retained after the prediction is
+computed.
+
+**7. Children's privacy** - The app does not knowingly collect personal
+information from children under 13.
+
+**8. Changes** - This policy may be updated from time to time; continued
+use of the app constitutes acceptance.
+
+**9. Contact** - mandakinimanjal@gmail.com
+        """
+    )
