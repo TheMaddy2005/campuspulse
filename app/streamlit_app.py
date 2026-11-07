@@ -242,3 +242,8 @@ use of the app constitutes acceptance.
 **9. Contact** - mandakinimanjal@gmail.com
         """
     )
+
+st.markdown(
+    "<p style=\"margin:8px 0 0; font-size:12px; font-weight:700; color:rgba(255,255,255,.5); text-transform:uppercase; letter-spacing:1.2px; text-align:center;\">Made with love by Maddy 🤍</p>",
+    unsafe_allow_html=True,
+)
