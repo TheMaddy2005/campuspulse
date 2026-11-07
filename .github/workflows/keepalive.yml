@@ -1,0 +1,48 @@
+name: Keep Streamlit app awake
+
+on:
+  schedule:
+    # every 6 hours; Streamlit Community Cloud sleeps apps after 12h without traffic
+    - cron: '43 */6 * * *'
+    # weekly heartbeat so GitHub does not disable scheduled workflows after 60 days without repo activity
+    - cron: '17 4 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Visit app and resume it if sleeping
+        run: |
+          APP="https://campuspulse-maddy.streamlit.app"
+          # a plain visit counts as traffic and resets Streamlit's 12h sleep timer
+          curl -s -o /dev/null -w "GET / -> %{http_code}\n" "$APP/"
+          # the same request the "Yes, get this app back up!" button makes, in case it is asleep
+          JAR=$(mktemp)
+          TOKEN=$(curl -s -o /dev/null -D - -c "$JAR" "$APP/api/v2/app/status" | tr -d '\r' | awk -F': ' 'tolower($1)=="x-csrf-token"{print $2}')
+          curl -s -o /dev/null -w "POST resume -> %{http_code}\n" -X POST -b "$JAR" -c "$JAR" \
+            -H "x-csrf-token: $TOKEN" -H "x-streamlit-machine-id: $(uuidgen | tr '[:upper:]' '[:lower:]')" \
+            -H "origin: $APP" -H "referer: $APP/" "$APP/api/v2/app/resume"
+          sleep 20
+          echo "status after:"
+          curl -s "$APP/api/v2/app/status"
+          echo
+
+  heartbeat:
+    # weekly cron only, plus manual runs to bootstrap the branch
+    if: github.event.schedule == '17 4 * * 1' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Commit heartbeat on a side branch (keeps scheduled workflows enabled, does not redeploy the app)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B keepalive-heartbeat
+          date -u +%FT%TZ > HEARTBEAT.md
+          git add HEARTBEAT.md
+          git commit -m "heartbeat $(date -u +%F)" || echo "nothing to commit"
+          git push -f origin keepalive-heartbeat
